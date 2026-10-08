@@ -49,7 +49,7 @@ jobs:
           dotnet-version: "9.0.x"
 
       - name: Install WebAssembly build tools
-        run: dotnet workload install wasm-tools
+        run: dotnet workload restore app/engine/web/ReplaySim.Web.csproj
 
       - name: Set up Node.js 24
         uses: actions/setup-node@v4
