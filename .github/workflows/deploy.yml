@@ -1,11 +1,15 @@
 name: Deploy site
 
 # Builds the replay player from aexer0e/more-of-dots and publishes it to GitHub
-# Pages. more-of-dots requests a build when its VERSION changes; a manual run
+# Pages. more-of-dots requests a build when its VERSION changes, a push that
+# changes a tournament rebuilds with the current more-of-dots, and a manual run
 # builds any branch, tag or commit.
 on:
   repository_dispatch:
     types: [more-of-dots-updated]
+  push:
+    branches: [main]
+    paths: ["tournaments/**"]
   workflow_dispatch:
     inputs:
       ref:
@@ -31,7 +35,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Check out the sound files
+      - name: Check out the sound files and tournaments
         uses: actions/checkout@v4
         with:
           path: site
@@ -64,7 +68,7 @@ jobs:
 
       - name: Build the site
         working-directory: app
-        run: node scripts/build-site.mjs --audio ../site/audio
+        run: node scripts/build-site.mjs --audio ../site/audio --tournaments ../site/tournaments
 
       - name: Upload the site
         uses: actions/upload-pages-artifact@v3

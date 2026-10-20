@@ -2,7 +2,7 @@
 
 Watch War of Dots replays in the browser: https://aexer0e.dev/wod-replay-player/
 
-Open a `.rep` file with the button, drop it on the page, or link to one with `?replay=<url>`.
+Drop `.rep` files on the home page to watch them; they are kept in that browser only. Tournament brackets and their replays are listed below. Every page has a link that can be shared, such as `#/girth-tournament-3/105/6-city` for one game.
 
 ## How this repository works
 
@@ -10,14 +10,25 @@ The player is the one from [More of Dots](https://github.com/aexer0e/more-of-dot
 
 - `.github/workflows/deploy.yml`, which checks out `more-of-dots`, compiles its replay engine to WebAssembly, builds the player page and publishes the result to GitHub Pages.
 - `audio/`, the game's music and sound effects in web formats.
+- `tournaments/`, one folder per tournament with its `.rep` files and `tournament.json`.
 
 Changes to the player or the engine are made in `more-of-dots`.
 
 ## Deploying
 
-The site is rebuilt when `VERSION` changes on the `more-of-dots` main branch. To deploy by hand, run the **Deploy site** workflow from the Actions tab and enter the `more-of-dots` branch, tag or commit to build.
+The site is rebuilt when `VERSION` changes on the `more-of-dots` main branch, and when a push to this repository changes `tournaments/`. To deploy by hand, run the **Deploy site** workflow from the Actions tab and enter the `more-of-dots` branch, tag or commit to build.
 
 `version.json` on the site records the version and commit it was built from.
+
+## Tournaments
+
+Each folder in `tournaments/` is one tournament; its name is the tournament's address, as in `#/girth-tournament-3`. It holds the replays and a `tournament.json` with:
+- the name, format and start date
+- the final results
+- each player's bracket name and seed, and `username` when their in-game name is known
+- the matches from Challonge
+
+To add replays, put the `.rep` files in the folder and make sure both players of each replay have a `username`. The build assigns each replay to the match those two players played. When two players met more than once, name the replay's match in `"replays": { "file.rep": 113 }`. See `docs/web-player.md` in `more-of-dots` for the details.
 
 ## Audio
 
