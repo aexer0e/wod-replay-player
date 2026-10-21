@@ -10,13 +10,14 @@ The player is the one from [More of Dots](https://github.com/aexer0e/more-of-dot
 
 - `.github/workflows/deploy.yml`, which checks out `more-of-dots`, compiles its replay engine to WebAssembly, builds the player page and publishes the result to GitHub Pages.
 - `audio/`, the game's music and sound effects in web formats.
+- `maps/`, the game's official map images, laid out as in the game's folder (`maps/assets/zolamare_maps/map56.png`). Replays on official maps only name their map, so the player and the replay cards need these images.
 - `tournaments/`, one folder per tournament with its `.rep` files and `tournament.json`.
 
 Changes to the player or the engine are made in `more-of-dots`.
 
 ## Deploying
 
-The site is rebuilt when `VERSION` changes on the `more-of-dots` main branch, and when a push to this repository changes `tournaments/`. To deploy by hand, run the **Deploy site** workflow from the Actions tab and enter the `more-of-dots` branch, tag or commit to build.
+The site is rebuilt when `VERSION` changes on the `more-of-dots` main branch, and when a push to this repository changes `tournaments/` or `maps/`. To deploy by hand, run the **Deploy site** workflow from the Actions tab and enter the `more-of-dots` branch, tag or commit to build.
 
 `version.json` on the site records the version and commit it was built from.
 
@@ -29,6 +30,10 @@ Each folder in `tournaments/` is one tournament; its name is the tournament's ad
 - the matches from Challonge
 
 To add replays, put the `.rep` files in the folder and make sure both players of each replay have a `username`. The build assigns each replay to the match those two players played. When two players met more than once, name the replay's match in `"replays": { "file.rep": 113 }`. See `docs/web-player.md` in `more-of-dots` for the details.
+
+## Maps
+
+The files in `maps/assets/` are copied from the game's `assets` folder: every image in `fahero_maps`, `eronion_maps` and `custom_maps`, and the numbered maps in `zolamare_maps` without the large `world_map` images. After a game update adds maps, copy them in again and push.
 
 ## Audio
 

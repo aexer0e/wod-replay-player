@@ -9,7 +9,7 @@ on:
     types: [more-of-dots-updated]
   push:
     branches: [main]
-    paths: ["tournaments/**"]
+    paths: ["tournaments/**", "maps/**"]
   workflow_dispatch:
     inputs:
       ref:
@@ -35,7 +35,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Check out the sound files and tournaments
+      - name: Check out the sound files, maps and tournaments
         uses: actions/checkout@v4
         with:
           path: site
@@ -68,7 +68,7 @@ jobs:
 
       - name: Build the site
         working-directory: app
-        run: node scripts/build-site.mjs --audio ../site/audio --tournaments ../site/tournaments
+        run: node scripts/build-site.mjs --audio ../site/audio --maps ../site/maps --tournaments ../site/tournaments
 
       - name: Upload the site
         uses: actions/upload-pages-artifact@v3
