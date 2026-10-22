@@ -2,7 +2,7 @@
 
 Watch War of Dots replays in the browser: https://aexer0e.dev/wod-replay-player/
 
-Drop `.rep` files on the home page to watch them; they are kept in that browser only. Tournament brackets and their replays are listed below. Every page has a link that can be shared, such as `#/girth-tournament-3/105/6-city` for one game.
+Drop `.rep` files on the home page to watch them; they are kept in that browser only. Tournament brackets and their replays are listed below. Every page has a link that can be shared, such as `#/gt3/105/6-city` for one game.
 
 ## How this repository works
 
@@ -23,7 +23,7 @@ The site is rebuilt when `VERSION` changes on the `more-of-dots` main branch, an
 
 ## Tournaments
 
-Each folder in `tournaments/` is one tournament; its name is the tournament's address, as in `#/girth-tournament-3`. It holds the replays and a `tournament.json` with:
+Each folder in `tournaments/` is one tournament; its name is the tournament's address, as in `#/gt3`. When a folder is renamed, list its old name under `"aliases"` in `tournament.json` so old links still open. It holds the replays and a `tournament.json` with:
 - the name, format and start date
 - the final results
 - each player's bracket name and seed, and `username` when their in-game name is known
